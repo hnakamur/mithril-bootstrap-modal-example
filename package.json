@@ -12,6 +12,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "mithril": "^0.2.5",
     "mithril-bootstrap-modal": "^1.0.0"
   },
