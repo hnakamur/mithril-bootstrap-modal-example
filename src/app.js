@@ -9,15 +9,16 @@ var prompt = {
     this.field = m.prop("");
     this.submit = function() {
       attrs.callback(this.field());
+      return false;
     }.bind(this);
   },
   view: function(ctrl, attrs) {
-    return m("form", [
+    return m("form", {onsubmit: ctrl.submit}, [
       m("p",
         m("input[type='text']", {onchange: m.withAttr("value", ctrl.field), value: ctrl.field()})
       ),
       m("p",
-        m("button[type='button']", {onclick: ctrl.submit}, "Submit")
+        m("button[type='submit']", {onsubmit: ctrl.submit}, "Submit")
       )
     ]);
   }
