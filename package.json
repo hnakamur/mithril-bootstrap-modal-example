@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm-run-all build:*",
     "build:css": "mkdirp css && cpx node_modules/bootstrap/dist/css/bootstrap.min.css css/",
-    "build:js": "mkdirp js && browserify src/app.js -o js/app.js",
+    "build:js": "mkdirp js && browserify -g uglifyify src/app.js -o js/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -20,6 +20,7 @@
     "browserify": "^13.1.1",
     "cpx": "^1.5.0",
     "mkdirp": "^0.5.1",
-    "npm-run-all": "^3.1.1"
+    "npm-run-all": "^3.1.1",
+    "uglifyify": "^3.0.4"
   }
 }
