@@ -12,16 +12,29 @@ var prompt = {
       return false;
     }.bind(this);
   },
-  view: function(ctrl, attrs) {
-    return m("form", {onsubmit: ctrl.submit}, [
-      m("p",
-        m("input[type='text']", {onchange: m.withAttr("value", ctrl.field), value: ctrl.field()})
-      ),
-      m("p",
-        m("button[type='submit']", {onsubmit: ctrl.submit}, "Submit")
-      )
-    ]);
-  }
+  view: function() {
+    var focused = false;
+    return function(ctrl, attrs) {
+      return m("form", {onsubmit: ctrl.submit}, [
+        m("p",
+          m("input[type='text']", {
+            config: function(element) {
+              // NOTE: Set focus to input when the dialog is shown.
+              // https://github.com/lhorie/mithril.js/issues/488#issuecomment-82030189
+              // https://github.com/tastejs/todomvc/blob/b880885e4145975fd79a00db98e6c526deae12bb/examples/mithril/js/views/main-view.js#L30-L35
+              element.focus();
+              focused = true;
+            },
+            onchange: m.withAttr("value", ctrl.field),
+            value: ctrl.field()
+          })
+        ),
+        m("p",
+          m("button[type='submit']", {onsubmit: ctrl.submit}, "Submit")
+        )
+      ]);
+    }
+  }()
 };
 
 var page = {
