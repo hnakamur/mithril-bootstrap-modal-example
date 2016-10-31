@@ -15,7 +15,17 @@ var prompt = {
   view: function() {
     var focused = false;
     return function(ctrl, attrs) {
-      return m("form", {onsubmit: ctrl.submit}, [
+      return m("form", {
+          onkeydown: function(e) {
+            // close modal by pressing escape key
+            if (e.keyCode === 27) {
+              modal.hide();
+              return;
+            }
+            m.redraw.strategy("none");
+          },
+          onsubmit: ctrl.submit
+        }, [
         m("p",
           m("input[type='text']", {
             config: function(element) {
@@ -26,14 +36,6 @@ var prompt = {
               focused = true;
             },
             onchange: m.withAttr("value", ctrl.field),
-            onkeydown: function(e) {
-              // close modal by pressing escape key
-              if (e.keyCode === 27) {
-                modal.hide();
-                return;
-              }
-              m.redraw.strategy("none");
-            },
             value: ctrl.field()
           })
         ),
